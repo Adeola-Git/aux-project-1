@@ -1,0 +1,256 @@
+		STEP 1 – BACKEND CONFIGURATION
+
+I downloaded, installed, and configured my Mobaxterm. I also connected my EC2 instance to it
+
+ 
+
+I will update my newly configured EC2 server using the command
+		---------- sudo apt update
+ 
+
+I will also upgrade my server running the command;
+		---------- sudo apt upgrade
+
+ 
+
+ Next I need to get the location of Node.js on my Ubuntu software running the command;
+		---------curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+ 
+
+
+
+I will install Node.js with the command below
+		--------- sudo apt-get install -y nodejs
+ 
+
+The node comes with it own package manager called NPM which I will use to install node dependencies later
+I will verify node installation as well as the package manager with the command below
+		---------- node -v
+		---------- npm -v
+ 
+
+I will create a new diretcory for my To-Do project
+		--------- mkdir Todo
+ 
+
+I will chage to the newly created directory with the command
+		---------- cd Todo
+ 
+
+I will run the below command to create a new file in my newly created directory
+		----------- npm init
+
+ 
+
+I will run the below command to confirm that Ihave the package.json file
+		----------- ls
+ 
+
+I will run the command to install express
+		---------npm install express
+ 
+
+I will create a file with the command below and run "ls" command to be sure it was created
+	---------------touch index.js
+ 
+
+I will install dotenv with the command
+		------------ npm install dotenv
+ 
+
+I will open the index.js file with the command below and type below code into it.
+		-------- vim index.js
+ 
+
+It is time to start my server by typing the command below, but first I will go back to my EC2 instance, under inbound rules I will open port 5000. This way my server will be able to run.
+		--------- node index.js
+ 
+
+I will also copy the public adress and go to my web browser to check of it will work
+
+ 
+
+Next I will create routes that will define various endpoints that the To-do app will depend on and also 'cd' into it
+		-------- mkdir routes && cd routes
+ 
+
+I will create a new file called api.js and vim into it to copy code in the file
+		--------- touch api.js 
+		----------vim api.js
+ 
+
+Next i will chnage directory back to Todo and install the mongoose using rpm
+		-----------npm install mongoose
+ 
+I will create a new folder, cd into it and touch a file named todo.js
+		------- mkdir models && cd models &&touch todo.js
+ 
+
+I will open the file todojs and paste the code below into it
+		---------- vim todo.js
+ 
+
+I will change back to routes directory to update the api.js file and copy the below codes into it
+		------ cd routes 
+		------ vim api.js
+
+ 
+
+I will make use of mlab database to store my data
+ 
+
+I will change directory back to Todo and create a file nmed .env
+		------- touch .env
+ 
+
+I will vi into it and add a connection string to access the database.
+		------vi .env
+ 
+
+I need to update the index.js file to reflect the use of .env by typing the below code into it
+		------ vim index.js
+ 
+
+I will start my server using the command:
+		------ node index.js
+ 
+
+There is error which is because EADDRINUSE. This means there is a process ID running that I have to kill.
+To check the process ID I will run the command
+		-------- lsof -l tcp:5000
+ 
+
+Then i will kill the process ID with the command
+		------- kill -9 25937
+ 
+The I will run the command again
+		-------- node index.js
+ 
+
+There was an error so I went back to fix it, created a new database in 'mlab' and redid the entry I have this now
+ 
+
+I will install postman to test my API. Create a POST request to the API and also a GET request
+
+
+ 
+
+ 
+
+The result above shows that my API are working correctly sending and receviving. 
+Now I have to create my user interface for a web client to interatc with the application via API. I will run the comman
+		----------- npx create-react-app client
+ 
+
+
+This will create a new folder called client. Befire testing the react app there are some dependecies that need to be installed
+ 
+
+		----------- npm install nodemon --save-dev
+ 
+
+In Todo file I will open a file named package.json and change some parameters
+
+ 
+
+I will change directory into 'client' and open the package.json file to add the key value pair so the application can be accesses directly from the browser
+
+ 
+
+Iwill change directory back to 'Todo' and run the command below
+	-------- npm run dev
+	---------- npm install concurrently --save-dev
+
+
+ 
+
+I will go to my EC2 instance to edit the inbound rules by adding port 3000. This way I will be able to access the internet via my web browser
+
+ 
+
+
+I will open another terminal and change directory to "Todo" "client" and "src'". I will create a new directory inside "src" called component and change directory into it.
+		---------- cd Todo && clients && src
+		------- mkdircomponents
+		--------- cd components
+	
+ 
+
+ 
+
+I will touch the following inside the components directory
+		----------- touch Inputs.js ListTodo.js Todo.js
+
+ 
+I will open the Input.js and paste the following into it
+
+ 
+
+
+Next I will hange directory into "clients" and installll the axios package
+		--------- npm install axios
+ 
+
+I will change directory back to "components and "vi" into my ListTodo.js file and paste the following code into it
+		------------- cd src/components
+		------------ vi ListTodo.js
+ 
+
+I will also write the following code into my Todo.js file
+
+ 
+
+I will make an adjustment to my react code. Delete the logo and adjust the App.js
+		------- cd ..
+		-------- vi App.js
+ 
+ 
+I will also vi into App.css and paste the following code into it
+		--------- vi App.css
+ 
+
+I will also "vi" into the index.css file and copy the code below into it
+		--------------- vim index.css
+ 
+
+I will go back to Todo directory and run the command below
+		---------- npm run dev
+ 
+
+I will go back to my web browser and refresh it. It will look thus:
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
